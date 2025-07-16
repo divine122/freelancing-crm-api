@@ -30,15 +30,25 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website',
 ]
+
+CUSTOM_APPS =[
+    'website',
+    'user',
+]
+
+THIRDPARTY_APPS =[
+    'crispy_forms',
+]
+
+INSTALLED_APPPS = DJANGO_APPS + CUSTOM_APPS + THIRDPARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
