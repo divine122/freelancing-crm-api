@@ -8,10 +8,10 @@ def home(request):
     records = Records.objects.all()
     #check to see if logging in
     if request.method == "POST" :
-        username = request.POST['username']
+        email = request.POST['email']
         password = request.POST['password']
         #authenticate
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
             messages.success(request, 'You Have Been Logged In!')
@@ -35,9 +35,9 @@ def register_user(request):
             form.save()
 
             #authenticate login
-            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
             password = form.cleaned_data['password1']
-            user = authenticate(username=username, password=password)
+            user = authenticate(email=email, password=password)
             login(request, user)
             messages.success(request, 'You Have Successfully Registered! Welcome...')
             return redirect('home')

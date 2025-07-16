@@ -10,7 +10,7 @@ class UserManager(BaseUserManager):
         except ValidationError:
             raise ValidationError(_("Email Address Not Valid")) 
 
-    def create_user(self, email, passsword, **extra_fields):
+    def create_user(self, email, password, **extra_fields):
         extra_fields.setdefault("is_staff", False)
         extra_fields.setdefault("is_superuser",False)
 
@@ -22,12 +22,12 @@ class UserManager(BaseUserManager):
             raise ValueError(_("A Valid Email Address Must Be Provided For This Account"))
 
         user = self.model(email=email, **extra_fields)
-        user.set_password(passsword)
+        user.set_password(password)
         user.save()
         return user
 
     def create_superuser(self, email, password, **extra_fields):
-        extra_fields.setdefault("is-staff", True)
+        extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
         if extra_fields.get("is_staff") is not True:
