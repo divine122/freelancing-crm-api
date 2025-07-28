@@ -8,4 +8,7 @@ urlpatterns = [
     path('delete_record/<int:pk>', views.delete_record, name='delete_record'),
     path('add_record', views.add_record, name='add_record'),
     path('update_record/<int:pk>', views.update_record, name='update_record'),
+    path('verify_email/<str:email>', views.verify_email, name='verify-email'),
+    path("login", views.signin, name="signin"),
+    path("resend-otp", views.resend_otp, name="resend-otp"),
 ]

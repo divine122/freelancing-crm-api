@@ -3,6 +3,8 @@ from django.utils.translation  import gettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin
 from django.core.validators import MinLengthValidator
 from .managers import UserManager
+from django.conf import settings
+import secrets
 
 # Create your models here.
 
@@ -23,3 +25,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     def __str__(self):
         return f"{self.email}"
+
+
+class OtpToken(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="otps")
+    otp_code = models.CharField(max_length=6, default=secrets.token_hex(3))
+    otp_created_at = models.DateTimeField(auto_now_add=True)
+    otp_expires_at = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.email
